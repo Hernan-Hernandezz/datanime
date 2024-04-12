@@ -1,18 +1,30 @@
 "use server";
-import topAnime from "../../utils/api";
-import CardAnime from "../../components/Cards";
 import { Anime } from "@tutkli/jikan-ts";
-export default async function page() {
-  const data = await topAnime;
+
+import { ListTopCards } from "../../components/ListCards";
+import { pagination } from "../../models";
+import ListPages from "../../components/ListPages";
+
+export default async function page({
+  searchParams,
+}: {
+  searchParams?: { page?: string };
+}) {
+  const page = searchParams?.page || "1";
+  const res = await fetch(
+    `https://api.jikan.moe/v4/top/anime?page=${page}&limit=24`,
+  );
+  const resData = await res.json();
+  const dataAnime: Anime[] = resData.data;
+  const dataPagination: pagination = await resData.pagination;
   return (
-    <main>
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4">
-        {data.map((item: Anime) => (
-          <li className="text-red-900" key={item.mal_id}>
-            <CardAnime key={item.mal_id} item={item} />
-          </li>
-        ))}
-      </ul>
-    </main>
+    <div className="flex">
+      <main className="px-10 pt-10">
+        <section className="flex w-3/5 ">
+          <ListTopCards data={dataAnime} />
+        </section>
+        <ListPages data={dataPagination} />
+      </main>
+    </div>
   );
 }

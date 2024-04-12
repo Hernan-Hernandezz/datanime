@@ -1,6 +1,8 @@
-import { TopClient } from "@tutkli/jikan-ts";
+import { AnimeClient } from "@tutkli/jikan-ts";
 
-const client = new TopClient();
-const topAnime = client.getTopAnime().then((res) => res.data);
+const anime = new AnimeClient();
+const getRecommendation = anime
+  .getAnimeRecommendations(1)
+  .then((res) => res.data);
 
-export default topAnime;
+export { getRecommendation };
