@@ -1,29 +1,99 @@
 "use client";
-import { Anime } from "@tutkli/jikan-ts";
-import CardAnime from "./Cards";
+import { Anime } from "../models";
+import { Suspense } from "react";
 
-function ListTopCards({ data }: { data: Anime[] }) {
+import { CardAnime, CardAnimeSkeleton } from "./Cards";
+
+function ListCards({ data }: { data: Anime[] }) {
   return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid grid-cols-1 justify-center gap-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {data.map((item: Anime) => (
-        <li className="text-red-900" key={item.mal_id}>
-          <CardAnime key={item.mal_id} item={item} />
+        <li className="max-w-60 text-red-900" key={item.mal_id}>
+          <Suspense fallback={<CardAnimeSkeleton />}>
+            <CardAnime key={item.mal_id} item={item} />
+          </Suspense>
         </li>
       ))}
     </ul>
   );
 }
-
-function ListRecommendCards({ data }: { data: Anime[] }) {
+function ListCardsSkeleton() {
   return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4">
-      {data.map((item: Anime) => (
-        <li className="text-red-900" key={item.mal_id}>
-          <CardAnime key={item.mal_id} item={item} />
-        </li>
-      ))}
+    <ul className="grid grid-cols-1 justify-center gap-4  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
+      <li>
+        <CardAnimeSkeleton />
+      </li>
     </ul>
   );
 }
 
-export { ListTopCards, ListRecommendCards };
+export { ListCards, ListCardsSkeleton };
