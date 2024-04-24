@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const Button = ({
   children,
@@ -22,12 +23,23 @@ const Button = ({
   );
 };
 import { pagination } from "../models";
-export default function ListPages({ data }: { data: pagination }) {
+export default function ListPages({
+  data,
+  path,
+}: {
+  data: pagination;
+  path: string;
+}) {
   const lastPage = data?.last_visible_page;
   const currentPage = data?.current_page;
+  const searchParams = new URLSearchParams(useSearchParams());
+  searchParams.delete("page");
+  const params = searchParams.toString() ? `&${searchParams.toString()}` : "";
   const NextPage = () => {
     const hasNextPage = data?.has_next_page;
-    const reference: string = hasNextPage ? `/top?page=${currentPage + 1}` : "";
+    const reference: string = hasNextPage
+      ? `/${path}?page=${currentPage + 1}${params.toString()}`
+      : "";
     return (
       <Button className={`${hasNextPage ? "" : "hidden"}`} href={reference}>
         {">"}
@@ -37,7 +49,7 @@ export default function ListPages({ data }: { data: pagination }) {
   const PreviousPage = () => {
     const hasPreviousPage = currentPage > 1 ? true : false;
     const reference: string = hasPreviousPage
-      ? `/top?page=${currentPage - 1}`
+      ? `/${path}?page=${currentPage - 1}${params.toString()}`
       : "";
     return (
       <Button className={`${hasPreviousPage ? "" : "hidden"}`} href={reference}>
@@ -47,7 +59,10 @@ export default function ListPages({ data }: { data: pagination }) {
   };
   const LastPage = () => {
     return lastPage !== currentPage ? (
-      <Button className="w-14" href={`/top?page=${lastPage}`}>
+      <Button
+        className="w-14"
+        href={`/${path}?page=${lastPage}${params.toString()}`}
+      >
         {lastPage}
       </Button>
     ) : (
@@ -56,7 +71,7 @@ export default function ListPages({ data }: { data: pagination }) {
   };
   const FirstPage = () => {
     return currentPage !== 1 && currentPage > 5 ? (
-      <Button href={`/top?page=1`}>1</Button>
+      <Button href={`/${path}?page=1&${params.toString()}`}>1</Button>
     ) : (
       <></>
     );
@@ -64,7 +79,9 @@ export default function ListPages({ data }: { data: pagination }) {
   const Pages = () => {
     const hasNextPage = (length: number) => {
       return currentPage + length < lastPage ? (
-        <Button href={`/top?page=${currentPage + length}`}>
+        <Button
+          href={`/${path}?page=${currentPage + length}${params.toString()}`}
+        >
           {currentPage + length}
         </Button>
       ) : (
@@ -73,7 +90,9 @@ export default function ListPages({ data }: { data: pagination }) {
     };
     const hasPreviousPage = (length: number) => {
       return currentPage - length > 0 ? (
-        <Button href={`/top?page=${currentPage - length}`}>
+        <Button
+          href={`/${path}?page=${currentPage - length}${params.toString()}`}
+        >
           {currentPage - length}
         </Button>
       ) : (

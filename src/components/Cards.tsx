@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardBody, CardFooter, Image, Skeleton } from "@nextui-org/react";
-import { Anime } from "../models";
+import { Anime } from "@/models";
 import Link from "next/link";
 
 function CardAnime({ item }: { item: Anime }) {

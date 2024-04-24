@@ -1,3 +1,14 @@
+export interface FormularioProps {
+  onFormSubmit: (formData: FormData) => void;
+}
+
+export interface FormData {
+  genero: string;
+  estado: string;
+  año: string;
+  tipo: string;
+  ordenarPor: string;
+}
 export interface pagination {
   last_visible_page: number;
   current_page: number;
@@ -7,8 +18,15 @@ export interface pagination {
     per_page: number;
   };
   has_next_page: boolean;
-  last_page: number;
 }
+
+export interface Genres {
+  mal_id: number;
+  name: string;
+  url: string;
+  count: number;
+}
+
 export interface Anime {
   mal_id: number;
   url: string;
@@ -64,6 +82,11 @@ export interface Anime {
   demographics: string[];
   relations: relations[];
   streaming: any;
+  trailer: {
+    youtube_id: string;
+    url: string;
+    embed_url: string;
+  };
 }
 interface relations {
   relation: string;

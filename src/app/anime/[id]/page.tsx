@@ -1,8 +1,10 @@
-import { Anime } from "../../../models";
+"use server";
 import Link from "next/link";
 import { Divider, Image } from "@nextui-org/react";
 
-import { animeUrl } from "../../../utils/constats";
+import { animeUrl } from "@/utils/constats";
+import { Anime } from "@/models";
+import Youtube from "@/components/Youtube";
 export default async function Page({ params }: { params: { id: string } }) {
   const res = await fetch(`${animeUrl}/${params.id}/full`);
   const anime = await res.json();
@@ -39,31 +41,38 @@ export default async function Page({ params }: { params: { id: string } }) {
             <h2 className="p-4 text-xl font-bold">Synopsis</h2>
             <ul className="flex flex-wrap gap-1 p-4">
               {genres.map((genre) => (
-                <li
-                  className="rounded-full bg-primary-600 p-2 text-sm font-bold text-default-700 hover:bg-default-700 hover:text-primary-600"
-                  key={genre.mal_id}
-                >
-                  {genre.name}
+                <li key={genre.mal_id}>
+                  <button className="rounded-full bg-primary-600 p-2 text-sm font-bold text-default-700 hover:bg-default-700 hover:text-primary-600">
+                    {genre.name}
+                  </button>
                 </li>
               ))}
             </ul>
             <p className="rounded-2xl bg-content2 p-4 text-sm">{synopsis}</p>
           </div>
-          <ul className="flex flex-col gap-2 rounded-2xl bg-content2 p-4">
+          <ul className="flex w-full flex-col items-start gap-2 rounded-2xl bg-content2 p-4">
             {relations.map((relation) => (
-              <li
-                className="rounded p-1 text-sm font-bold text-default-700"
+              <button
+                className="rounded p-1 text-sm text-default-700"
                 key={relation.entry[0].mal_id}
               >
                 <Link
                   className="hover:text-primary-600"
                   href={`/anime/${relation.entry[0].mal_id}`}
                 >
-                  {`${relation.relation}: ${relation.entry[0].name}`}
+                  <span className="font-bold">{relation.entry[0].name}</span>(
+                  {relation.relation})
                 </Link>
-              </li>
+              </button>
             ))}
           </ul>
+          <Divider />
+          <div className="flex flex-col gap-2 rounded-2xl bg-content2 p-4">
+            <h3>trailer</h3>
+            <div className="rounded p-1 text-sm font-bold text-default-700">
+              <Youtube id={dataAnime.trailer.youtube_id} />
+            </div>
+          </div>
         </div>
       </div>
     </main>

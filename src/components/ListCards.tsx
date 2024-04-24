@@ -1,8 +1,8 @@
 "use client";
-import { Anime } from "../models";
+import { Anime } from "@/models";
 import { Suspense } from "react";
 
-import { CardAnime, CardAnimeSkeleton } from "./Cards";
+import { CardAnime, CardAnimeSkeleton } from "@/components/Cards";
 
 function ListCards({ data }: { data: Anime[] }) {
   return (

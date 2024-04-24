@@ -7,3 +7,4 @@ export const animeUrl = `${baseUrl}/anime`;
 export const mangaUrl = `${baseUrl}/manga`;
 export const charactersUrl = `${baseUrl}/characters`;
 export const peopleUrl = `${baseUrl}/people`;
+export const genresUrl = `${baseUrl}/genres/anime`;
