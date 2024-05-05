@@ -116,7 +116,7 @@ export default function ListPages({
     );
   };
   return (
-    <div className="flex gap-1 py-3">
+    <div className="flex gap-1 py-3 flex-wrap">
       <PreviousPage />
       <FirstPage />
       <Pages />

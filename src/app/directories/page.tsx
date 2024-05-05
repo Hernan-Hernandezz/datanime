@@ -16,6 +16,7 @@ export default async function page({
     year?: string;
     type?: string;
     order_by?: string;
+    q?: string;
   };
 }) {
   const page = searchParams?.page || "1";
@@ -33,6 +34,9 @@ export default async function page({
   if (searchParams?.type) {
     params.set("type", searchParams.type);
   }
+  if (searchParams?.q) {
+    params.set("q", searchParams.q);
+  }
   const res = await fetch(
     `${animeUrl}?limit=24&page=${page}&order_by=${order_by}&${params.toString()}`,
   );
@@ -43,11 +47,16 @@ export default async function page({
   const resDataGenres = await resGenres.json();
   const genre: Genres[] = resDataGenres.data;
   return (
-    <div className="min-h-screen max-w-7xl ">
-      <main className="w-max">
-        <h1>directories</h1>
+    <div className="mx-auto min-h-screen max-w-7xl p-7">
+      <main className="flex w-full flex-col items-center">
+        <h1 className="py-4 text-3xl">
+          List of animes{searchParams?.q ? `: ${searchParams?.q}` : ""}
+        </h1>
         <Form genres={genre} />
-        <ListCards data={dataAnime} />
+        <ListCards
+          data={dataAnime}
+          className="mx-auto grid w-full grid-cols-1 justify-center gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        />
         <ListPages data={dataPagination} path="directories" />
       </main>
     </div>

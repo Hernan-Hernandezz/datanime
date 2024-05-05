@@ -66,7 +66,7 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
     replace(`${path}?${params.toString()}`);
   }
   return (
-    <form action={getQuery} className="flex gap-2 pb-4">
+    <form action={getQuery} className="flex flex-wrap gap-2 py-4">
       <Container>
         <Label htmlFor="genres">Genres</Label>
 
@@ -96,11 +96,15 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
           <option value="movie">Película</option>
           <option value="ova">OVA</option>
           <option value="special">Especial</option>
+          <option value="tv_special">TV special</option>
+          <option value="ona">ONA</option>
+          <option value="music">Musica</option>
         </Select>
       </Container>
       <Container>
         <Label htmlFor="order_by">Order By</Label>
         <Select id="order_by" name="order_by">
+          <option value="">Select</option>
           <option value="popularity">Popularidad</option>
           <option value="score">Puntuación</option>
           <option value="favorites">Favoritos</option>
@@ -117,32 +121,3 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
     </form>
   );
 }
-//export default async function App() {
-//const inicialState = {
-//message: null,
-//errors: {},
-//};
-//const [state, dispatch] = useFormState(()=>{console.log("hola")},{});
-//const res = await fetch(genresUrl);
-//const resData = await res.json();
-//const genres: Genres[] = resData.data;
-//return (
-//<form
-//className="grid gap-4 rounded-2xl bg-default-300 p-4 shadow-lg lg:grid-cols-6"
-//action={dispatch}
-//method="get"
-//>
-//{genres.map((genre: Genres) => (
-//<div key={genre.mal_id}>
-//<input
-//type="checkbox"
-//key={genre.mal_id}
-//value={genre.name}
-//color="primary"
-///>
-//<label>{genre.name}</label>
-//</div>
-//))}
-//</form>
-//);
-//}

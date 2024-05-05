@@ -1,3 +1,15 @@
+export interface entryWatch {
+  mal_id: number;
+  images: images;
+  title: string;
+  url: string;
+}
+interface trailer {
+  youtube_id: string;
+  url: string;
+  embed_url: string;
+  images: images;
+}
 export interface FormularioProps {
   onFormSubmit: (formData: FormData) => void;
 }
@@ -30,13 +42,8 @@ export interface Genres {
 export interface Anime {
   mal_id: number;
   url: string;
-  images: {
-    webp: {
-      image_url: string;
-      small_image_url: string;
-      large_image_url: string;
-    };
-  };
+  images: images;
+  titles: titles[];
   title: string;
   title_english: string;
   title_japanese: string;
@@ -76,25 +83,64 @@ export interface Anime {
   producers: string[];
   licensors: string[];
   studios: string[];
-  genres: entry[];
+  genres: entryBasic[];
   explicit_genres: any[];
   themes: string[];
   demographics: string[];
   relations: relations[];
-  streaming: any;
-  trailer: {
-    youtube_id: string;
-    url: string;
-    embed_url: string;
-  };
+  streaming: streaming[];
+  trailer: trailer;
 }
 interface relations {
   relation: string;
-  entry: entry[];
+  entry: entryBasic[];
 }
-interface entry {
+interface entryBasic {
   mal_id: number;
   type: string;
   name: string;
   url: string;
+}
+interface titles {
+  type: string;
+  title: string;
+}
+interface streaming {
+  name: string;
+  url: string;
+}
+interface images {
+  webp: {
+    image_url: string;
+    small_image_url: string;
+    large_image_url: string;
+  };
+  jpg: {
+    image_url: string;
+    small_image_url: string;
+    large_image_url: string;
+  };
+}
+
+interface entryEpisode {
+  mal_id: number;
+  images: images;
+  title: string;
+  premium: boolean;
+}
+
+export interface recentEpisode {
+  entry: entryWatch;
+  episodes: entryEpisode[];
+  region_locker: boolean;
+}
+
+export interface promo {
+  entry: entryWatch;
+  trailer: trailer;
+}
+
+export interface responseEpisodes {
+  pagination: pagination;
+  data: recentEpisode[];
 }
