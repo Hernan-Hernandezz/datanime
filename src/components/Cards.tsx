@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardBody, CardFooter, Image, Skeleton } from "@nextui-org/react";
-import { Anime, promo, entryPromo, recentEpisode } from "@/models";
+import { Anime, promo, entryWatch, recentEpisode } from "@/models";
 import Link from "next/link";
 
 function CardAnime({ item }: { item: Anime }) {
@@ -54,7 +54,7 @@ function CardAnimeSkeleton() {
   );
 }
 
-function CardPromo({ item }: { item: entryPromo }) {
+function CardPromo({ item }: { item: entryWatch }) {
   const { title, images, mal_id } = item;
   const imageUrl = images.webp?.image_url;
   return (
