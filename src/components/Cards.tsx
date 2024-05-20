@@ -1,6 +1,6 @@
 "use client";
 import { Card, CardBody, CardFooter, Image, Skeleton } from "@nextui-org/react";
-import { Anime, promo, entryWatch, recentEpisode } from "@/models";
+import { Anime, entryWatch, recentEpisode, getAnimeCharacters } from "@/models";
 import Link from "next/link";
 
 function CardAnime({ item }: { item: Anime }) {
@@ -34,7 +34,7 @@ function CardAnime({ item }: { item: Anime }) {
             <Status />
           </div>
         </CardBody>
-        <CardFooter className="bg-content2 flex flex-auto flex-col items-start justify-start ">
+        <CardFooter className="flex flex-auto flex-col items-start justify-start bg-content2 ">
           <p>{title}</p>
         </CardFooter>
       </Card>
@@ -104,4 +104,34 @@ function CardEpisodes({ item }: { item: recentEpisode }) {
     </Link>
   );
 }
-export { CardAnime, CardAnimeSkeleton, CardPromo, CardEpisodes };
+function CardCharacters({ item }: { item: getAnimeCharacters }) {
+  const { name, images } = item.character;
+  const { role } = item;
+  return (
+    <Link href={`/character/${item.character.mal_id}`}>
+      <Card className="h-full bg-content2">
+        <CardBody className="p-0">
+          <Image
+            loading="lazy"
+            className="h-60 w-full object-cover"
+            src={images.webp?.image_url}
+            alt={name}
+            width={"100%"}
+            height={"100%"}
+          />
+        </CardBody>
+        <CardFooter className="flex flex-auto flex-col items-start justify-start">
+          <h3 className="font-bold">{name}</h3>
+          <p>{role}</p>
+        </CardFooter>
+      </Card>
+    </Link>
+  );
+}
+export {
+  CardAnime,
+  CardAnimeSkeleton,
+  CardPromo,
+  CardEpisodes,
+  CardCharacters,
+};

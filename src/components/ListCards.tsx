@@ -1,5 +1,5 @@
 "use client";
-import { Anime, promo, recentEpisode } from "@/models";
+import { Anime, promo, recentEpisode, getAnimeCharacters } from "@/models";
 import { Suspense } from "react";
 
 import {
@@ -7,6 +7,7 @@ import {
   CardAnimeSkeleton,
   CardPromo,
   CardEpisodes,
+  CardCharacters,
 } from "@/components/Cards";
 import Link from "next/link";
 
@@ -14,7 +15,7 @@ function ListCards({ data, className }: { data: Anime[]; className?: string }) {
   return (
     <ul className={className}>
       {data.map((item: Anime) => (
-        <li className="max-w-60 text-red-900" key={item.mal_id}>
+        <li className="max-w-60 text-red-900 mx-auto" key={item.mal_id}>
           <Suspense fallback={<CardAnimeSkeleton />}>
             <CardAnime item={item} />
           </Suspense>
@@ -78,6 +79,48 @@ function List({ data, className }: { data: Anime[]; className?: string }) {
       ))}
     </ul>
   );
+}
+
+function ListCardsCharacters({
+  data,
+  className,
+  filterMain,
+}: {
+  data: getAnimeCharacters[];
+  className?: string;
+  filterMain?: boolean;
+}) {
+  if (!filterMain) {
+    return (
+      <ul className={className}>
+        {data.find((item) => item.role === "Main") && (
+          <li
+            className="max-w-60 py-3 text-default-900 hover:text-secondary-600"
+            key={data[0].character.name + "-" + data[0].character.mal_id}
+          >
+            <Suspense fallback={<CardAnimeSkeleton />}>
+              <CardCharacters item={data[0]} />
+            </Suspense>
+          </li>
+        )}
+      </ul>
+    );
+  } else {
+    return (
+      <ul className={className}>
+        {data.map((item: getAnimeCharacters) => (
+          <li
+            className="max-w-60 py-3 text-default-900 hover:text-secondary-600"
+            key={item.character.name + "-" + item.character.mal_id}
+          >
+            <Suspense fallback={<CardAnimeSkeleton />}>
+              <CardCharacters item={item} />
+            </Suspense>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 }
 
 function ListCardsSkeleton() {
@@ -165,4 +208,5 @@ export {
   ListCardsSkeleton,
   ListCardsPromo,
   ListCardsEpisodes,
+  ListCardsCharacters,
 };

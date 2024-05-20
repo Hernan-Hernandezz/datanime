@@ -7,6 +7,7 @@ import { Divider, Image } from "@nextui-org/react";
 import { animeUrl } from "@/utils/constats";
 import { Anime } from "@/models";
 import Youtube from "@/components/Youtube";
+import Characters from "@/components/Characters";
 function Container({
   children,
   className,
@@ -72,7 +73,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             {streaming.map((stream) => (
               <li key={stream.name}>
                 <a
-                  href={`${stream.name === "Crunchyroll" ? "https://crunchyroll.com/" + "search?q=" + titles.find((title) => title.type === "English")?.title : stream.url}`}
+                  href={`${stream.name === "Crunchyroll" && titles.find((title) => title.type === "English") ? "https://crunchyroll.com/" + "search?q=" + titles.find((title) => title.type === "English")?.title : stream.url}`}
                   className="w-32 rounded-full bg-primary-200 p-2 text-sm font-bold text-default-900 hover:bg-primary-300"
                   target="_blank"
                   rel="noreferrer"
@@ -103,6 +104,32 @@ export default async function Page({ params }: { params: { id: string } }) {
       );
     } else {
       return null;
+    }
+  };
+  const Relations = () => {
+    if (relations.length > 0) {
+      return (
+        <Container>
+          <ul className="flex w-full flex-col items-start gap-2">
+            {relations.map((relation) => (
+              <button
+                className="rounded p-1 text-sm text-default-700"
+                key={relation.entry[0].mal_id}
+              >
+                <Link
+                  className="hover:text-primary-600"
+                  href={`/anime/${relation.entry[0].mal_id}`}
+                >
+                  <span className="font-extrabold">
+                    {`${relation.entry[0].name} `}
+                  </span>
+                  ({relation.relation})
+                </Link>
+              </button>
+            ))}
+          </ul>
+        </Container>
+      );
     }
   };
   return (
@@ -144,26 +171,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <p className="text-sm">{synopsis}</p>
             </Container>
           </div>
-          <Container>
-            <ul className="flex w-full flex-col items-start gap-2">
-              {relations.map((relation) => (
-                <button
-                  className="rounded p-1 text-sm text-default-700"
-                  key={relation.entry[0].mal_id}
-                >
-                  <Link
-                    className="hover:text-primary-600"
-                    href={`/anime/${relation.entry[0].mal_id}`}
-                  >
-                    <span className="font-extrabold">
-                      {`${relation.entry[0].name} `}
-                    </span>
-                    ({relation.relation})
-                  </Link>
-                </button>
-              ))}
-            </ul>
-          </Container>
+          <Relations />
           <Container className="flex flex-col gap-2">
             <h2 className="text-xl font-bold">Trailer</h2>
             <div className="rounded p-1 text-sm font-bold text-default-700">
@@ -182,6 +190,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                 </li>
               ))}
             </ul>
+          </Container>
+          <Container>
+            <Characters id={params.id} />
           </Container>
         </div>
       </div>

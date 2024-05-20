@@ -109,7 +109,7 @@ interface streaming {
   name: string;
   url: string;
 }
-interface images {
+export interface images {
   webp: {
     image_url: string;
     small_image_url: string;
@@ -143,4 +143,45 @@ export interface promo {
 export interface responseEpisodes {
   pagination: pagination;
   data: recentEpisode[];
+}
+
+interface character {
+  mal_id: number;
+  images: images;
+  name: string;
+  url: string;
+}
+export interface getAnimeCharacters {
+  character: character;
+  url: string;
+  images: images;
+  name: string;
+  name_kanji: string;
+  nicknames: string[];
+  favorites: number;
+  about: string;
+  anime: {
+    roles: string[];
+    anime: entryWatch;
+  }[];
+  manga: {
+    roles: string[];
+    manga: entryWatch;
+  }[];
+  role: string;
+  voice_actors: [
+    {
+      person: {
+        mal_id: number;
+        images: images;
+        name: string;
+        url: string;
+      };
+      language: string;
+    },
+  ];
+}
+
+export interface getCharacterFullById {
+  data: getAnimeCharacters;
 }
