@@ -52,7 +52,7 @@ export default function NavBar({
             />
             <Link
               href={search !== "" ? `/directories?q=${search}` : ""}
-              className="w-1/5 rounded-r-full bg-default-200 p-3 hover:bg-primary-600"
+              className="w-2/5 rounded-r-full bg-default-200 p-3 hover:bg-primary-600"
             >
               Search
             </Link>

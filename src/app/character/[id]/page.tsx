@@ -19,12 +19,14 @@ export default async function Page({ params }: { params: { id: string } }) {
   const character: getAnimeCharacters = data.data;
   const { about, images, name, url, favorites, voice_actors, anime } =
     character;
-  const formattedAbout = about.split("\n").map((line) => (
-    <React.Fragment key={line}>
-      <p className="text-sm">{line}</p>
-      <br />
-    </React.Fragment>
-  ));
+  const formattedAbout = about
+    ? about.split("\n").map((line) => (
+        <React.Fragment key={line}>
+          <p className="text-sm">{line}</p>
+          <br />
+        </React.Fragment>
+      ))
+    : "No information";
 
   return (
     <div className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center p-7">
@@ -38,19 +40,22 @@ export default async function Page({ params }: { params: { id: string } }) {
       <h1 className="text-3xl font-bold">{name}</h1>
       <div>
         <h2 className="text-2xl font-bold">About character</h2>
-        <p className="text-sm ">{formattedAbout}</p>
+        <div>{formattedAbout}</div>
       </div>
       <h2 className="text-2xl font-bold">apperance in</h2>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {anime.map((item) => (
-          <li className="max-w-60" key={item.anime.mal_id}>
+          <li
+            className="w-full max-w-60 hover:scale-105"
+            key={item.anime.mal_id}
+          >
             <CardPromo item={item.anime} />
           </li>
         ))}
       </ul>
 
       <h2 className="text-2xl font-bold">other images</h2>
-      <ul className="flex flex-wrap gap-2">
+      <ul className="grid grid-cols-2 justify-between gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {otherImages.map((image) => (
           <li key={image.jpg.image_url}>
             <Image

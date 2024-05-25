@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-screen w-full bg-default-50 text-default-900 ${darkMode == true ? "dark" : ""} `}
+        className={`min-h-screen w-full bg-default-50 text-default-900 pb-5 ${darkMode == true ? "dark" : ""} `}
       >
         <Providers>
           <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
