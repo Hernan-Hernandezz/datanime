@@ -1,7 +1,7 @@
 export default function Menu({ className }: { className?: string }) {
   return (
     <div className={className}>
-      <svg
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         x="0px"
         y="0px"

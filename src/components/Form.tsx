@@ -83,9 +83,9 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
         <Label htmlFor="status">State</Label>
         <Select id="status" name="status">
           <option value="">Select</option>
-          <option value="airing">En emisión</option>
-          <option value="complete">Finalizado</option>
-          <option value="upcoming">Proximamente</option>
+          <option value="airing">emitting</option>
+          <option value="complete">complete</option>
+          <option value="upcoming">upcoming</option>
         </Select>
       </Container>
       <Container>
@@ -93,21 +93,21 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
         <Select id="type" name="type">
           <option value="">Select</option>
           <option value="tv">TV</option>
-          <option value="movie">Película</option>
+          <option value="movie">Movie</option>
           <option value="ova">OVA</option>
-          <option value="special">Especial</option>
+          <option value="special">special</option>
           <option value="tv_special">TV special</option>
           <option value="ona">ONA</option>
-          <option value="music">Musica</option>
+          <option value="music">music</option>
         </Select>
       </Container>
       <Container>
         <Label htmlFor="order_by">Order By</Label>
         <Select id="order_by" name="order_by">
           <option value="">Select</option>
-          <option value="popularity">Popularidad</option>
-          <option value="score">Puntuación</option>
-          <option value="favorites">Favoritos</option>
+          <option value="popularity">Popularity</option>
+          <option value="score">score</option>
+          <option value="favorites">Favorites</option>
         </Select>
       </Container>
       <Container>
@@ -115,7 +115,7 @@ export default function StatefulForm({ genres }: { genres: Genres[] }) {
           type="submit"
           className="h-full w-full rounded-lg  p-1 text-default-700"
         >
-          search
+          filter
         </button>
       </Container>
     </form>

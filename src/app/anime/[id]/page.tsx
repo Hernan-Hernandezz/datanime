@@ -8,6 +8,19 @@ import { animeUrl } from "@/utils/constats";
 import { Anime } from "@/models";
 import Youtube from "@/components/Youtube";
 import Characters from "@/components/Characters";
+
+export async function generateMetadata() {
+  return {
+    title: "datanime",
+    description: "information about the anime",
+    authors: [
+      {
+        name: "Hernan-Hernandezz",
+        url: "https://github.com/Hernan-Hernandezz",
+      },
+    ],
+  };
+}
 function Container({
   children,
   className,

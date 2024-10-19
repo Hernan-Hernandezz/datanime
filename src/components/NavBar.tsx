@@ -25,7 +25,7 @@ export default function NavBar({
   };
   const [search, setSearch] = useState("");
   return (
-    <header className="mx-auto max-w-7xl justify-center">
+    <header className="mx-auto mb-4 max-w-7xl justify-center">
       <nav className=" flex max-w-full justify-between rounded-2xl bg-primary-200 p-4">
         <button
           onClick={toggle}
@@ -36,8 +36,12 @@ export default function NavBar({
         <ul
           className={`absolute left-0 top-20 z-20 h-40 w-screen flex-col items-center justify-around bg-primary-200 text-lg font-bold transition-all duration-1000 md:relative md:left-auto md:top-auto md:flex md:h-auto md:w-2/5 md:flex-row ${open ? "flex" : "hidden"}`}
         >
-          <Item href="/">Home</Item>
-          <Item href="/directories">Directories</Item>
+          <Item href="/">
+            <button onClick={toggle}>Home</button>
+          </Item>
+          <Item href="/directories">
+            <button onClick={toggle}>Directories</button>
+          </Item>
         </ul>
         <div className="flex">
           <SwitchMode darkMode={darkMode} setDarkMode={setDarkMode} />

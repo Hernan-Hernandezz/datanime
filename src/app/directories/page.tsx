@@ -1,11 +1,26 @@
 "use server";
-import { useSearchParams } from "next/navigation";
-import { animeUrl, genresUrl } from "@/utils/constats";
+//import { useSearchParams } from "next/navigation";
+import type { Metadata } from "next";
 
+import { animeUrl, genresUrl } from "@/utils/constats";
 import { Anime, pagination, Genres } from "@/models";
 import { ListCards } from "@/components/ListCards";
 import ListPages from "@/components/ListPages";
 import Form from "@/components/Form";
+
+export async function generateMetadata() {
+  return {
+    title: "datanime",
+    description: "filter your preferences to find your anime",
+    authors: [
+      {
+        name: "Hernan-Hernandezz",
+        url: "https://github.com/Hernan-Hernandezz",
+      },
+    ],
+  };
+}
+
 export default async function page({
   searchParams,
 }: {

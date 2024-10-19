@@ -1,10 +1,24 @@
-import Link from "next/link";
+"use server";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Divider, Image } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 import { getAnimeCharacters, images } from "@/models";
 import { characterUrl } from "@/utils/constats";
 import { CardPromo } from "@/components/Cards";
 import React from "react";
+
+export async function generateMetadata() {
+  return {
+    title: "datanime",
+    description: "information about the character",
+    authors: [
+      {
+        name: "Hernan-Hernandezz",
+        url: "https://github.com/Hernan-Hernandezz",
+      },
+    ],
+  };
+}
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -42,7 +56,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <h2 className="text-2xl font-bold">About character</h2>
         <div>{formattedAbout}</div>
       </div>
-      <h2 className="text-2xl font-bold">apperance in</h2>
+      <h2 className="mb-4 text-2xl font-bold">apperance in</h2>
       <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {anime.map((item) => (
           <li

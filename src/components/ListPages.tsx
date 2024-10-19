@@ -105,7 +105,7 @@ export default function ListPages({
         {hasPreviousPage(3)}
         {hasPreviousPage(2)}
         {hasPreviousPage(1)}
-        <Button className="w-10 bg-primary-700 hover:bg-primary-700" href="">
+        <Button className="w-10 bg-primary-300 hover:bg-primary-700" href="">
           {currentPage}
         </Button>
         {hasNextPage(1)}
@@ -116,7 +116,7 @@ export default function ListPages({
     );
   };
   return (
-    <div className="flex gap-1 py-3 flex-wrap">
+    <div className="flex flex-wrap gap-1 py-3">
       <PreviousPage />
       <FirstPage />
       <Pages />
