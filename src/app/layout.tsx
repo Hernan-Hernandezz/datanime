@@ -1,5 +1,5 @@
 "use client";
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 // import type { Metadata } from "next";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -11,10 +11,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [darkMode, setDarkMode] = useState(false);
-  useEffect(()=>{
-  const preferenTheme = window.matchMedia('(prefers-color-scheme: dark)')
-  setDarkMode(preferenTheme?true:false)
-})
+  useEffect(() => {
+    const preferenTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    setDarkMode(preferenTheme ? true : false)
+  }, [])
   return (
     <html lang="en">
       <body
