@@ -43,7 +43,7 @@ export default function NavBar({
             <button onClick={toggle}>Directories</button>
           </Item>
         </ul>
-        <div className="flex">
+        <div className="flex items-center justify-center gap-1.5">
           <SwitchMode darkMode={darkMode} setDarkMode={setDarkMode} />
           <div className="rounded-full bg-default-200">
             <input

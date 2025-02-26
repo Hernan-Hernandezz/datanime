@@ -29,7 +29,7 @@ function CardAnime({ item }: { item: Anime }) {
             width={"100%"}
             height={"100%"}
           />
-          <div className="absolute top-64 z-10 flex w-full flex-row items-center gap-2 bg-content2 bg-opacity-90 p-2 font-bold">
+          <div className="top-64 z-10 flex w-full flex-row items-center gap-2 bg-content2 bg-opacity-90 p-2 font-bold">
             <p>{item.type}</p>
             <Status />
           </div>

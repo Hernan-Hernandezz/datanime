@@ -1,5 +1,4 @@
 "use client";
-import { Switch } from "@nextui-org/react";
 import { SunIcon, MoonIcon } from "@/components/Icons";
 
 export function SwitchMode({
@@ -10,13 +9,15 @@ export function SwitchMode({
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
-    <Switch
-      size="lg"
-      color="secondary"
-      isSelected={darkMode}
-      onValueChange={setDarkMode}
-      startContent={<SunIcon />}
-      endContent={<MoonIcon />}
-    />
+    <button
+      className="grid h-full w-10 content-center justify-center rounded-full bg-default-200"
+      onClick={() => setDarkMode(!darkMode)}
+    >
+      {darkMode ? (
+        <SunIcon className="place-self-start" />
+      ) : (
+        <MoonIcon className="place-self-end" />
+      )}
+    </button>
   );
 }

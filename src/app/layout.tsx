@@ -12,9 +12,9 @@ export default function RootLayout({
 }>) {
   const [darkMode, setDarkMode] = useState(false);
   useEffect(() => {
-    const preferenTheme = window.matchMedia('(prefers-color-scheme: dark)')
-    setDarkMode(preferenTheme ? true : false)
-  }, [])
+    const preferenTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    setDarkMode(preferenTheme ? true : false);
+  }, []);
   return (
     <html lang="en">
       <body
