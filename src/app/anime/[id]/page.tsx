@@ -150,7 +150,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex min-h-screen max-w-7xl flex-col items-center justify-center gap-4 md:flex-row md:items-start">
         <div className="flex flex-col gap-4 p-4 pt-8">
           <Image
-            className="w-full object-cover md:h-80 md:w-60"
+            className="w-full rounded-md object-cover md:h-80 md:w-60"
             src={image_url}
             alt={`image from ${title}`}
             width={"100%"}

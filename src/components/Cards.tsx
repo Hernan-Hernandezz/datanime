@@ -23,7 +23,7 @@ function CardAnime({ item }: { item: Anime }) {
       <Card className="h-full bg-content2">
         <CardBody className="p-0">
           <Image
-            className="h-80 w-full object-cover"
+            className="h-80 w-full rounded-md object-cover"
             src={imageUrl}
             alt={title}
             width={"100%"}
